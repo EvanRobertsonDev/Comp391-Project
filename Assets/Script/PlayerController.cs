@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletSpawn;
     public GameObject bullet;
 
+    public int health = 50;
+
     public GameObject turretPrefab;
     private GameObject liveTurret;
 
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float timer = 0;
     public float fireRate = 0.25f;
     public float minX, minY, maxX, maxY;
+    private float attackTimer = 0;
 
     void Start()
     {
@@ -61,24 +64,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D colloider)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-
-    }
-
-    private void OnTriggerExit2D(Collider2D colloider)
-    {
-
+        if (attackTimer > 2)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                health -= 2;
+            }
+            attackTimer = 0;
+        }
+        attackTimer += Time.deltaTime;
     }
 }
 

@@ -17,7 +17,7 @@ public class TurretScript : MonoBehaviour
     List<GameObject> enemies = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         
     }
